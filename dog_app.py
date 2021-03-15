@@ -118,15 +118,15 @@ def define_model():
     
     
     '''
-    model_transfer = models.vgg16(pretrained=True)
+    model_transfer = models.densenet121(pretrained=True)
 
     for params in model_transfer.features.parameters():
         params.requires_grad = False
 
 
-    num_inputs = model_transfer.classifier[6].in_features
+    num_inputs = model_transfer.classifier.in_features
     final_layer = nn.Linear(num_inputs,133)
-    model_transfer.classifier[6] = final_layer
+    model_transfer.classifier = final_layer
     
     return model_transfer
     
@@ -155,6 +155,9 @@ def predict_breed_transfer(img_path, model_transfer):
     image_t_tensor = transform(image_t)
     
     image_t_tensor.unsqueeze_(0)
+    
+    if use_cuda:
+        image_t_tensor = image_t_tensor.cuda()
     
     
     output_t = model_transfer(image_t_tensor)
