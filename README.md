@@ -19,6 +19,7 @@ cv2,
 Flask, 
 torch,
 PIL
+
 Run app from command line using **python web_app.py**
 
 
