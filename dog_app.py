@@ -4,13 +4,10 @@ Created on Thu Mar 11 21:19:54 2021
 
 @author: BronyahJ
 """
-from flask import Flask, request, jsonify, render_template
+
 import torch
 from torchvision import models, transforms
 from torch import nn
-import os
-import io
-import numpy as np
 import cv2
 from PIL import Image, ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
@@ -155,6 +152,8 @@ def predict_breed_transfer(img_path, model_transfer):
     image_t_tensor = transform(image_t)
     
     image_t_tensor.unsqueeze_(0)
+    
+    model_transfer.eval()
     
     if use_cuda:
         image_t_tensor = image_t_tensor.cuda()
