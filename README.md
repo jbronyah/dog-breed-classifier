@@ -15,10 +15,10 @@
 <a name="install"></a>
 ## Installation
 The project was written primarily in Python 3  and the libraries used are provided in the Anaconda Distribution in addition to the following:
-cv2,
+**cv2,
 Flask, 
 torch,
-PIL
+PIL**
 
 Run app from command line using **python web_app.py**
 
