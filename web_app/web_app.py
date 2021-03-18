@@ -1,11 +1,28 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Mar 14 16:07:32 2021
+'''
+DESCRIPTION
 
-@author: BronyahJ
-"""
+This module is able to process an image given to it and detect either a dog or human
+It further is able to classify the detected dog breed using a trained model with 82% accuracy
+The module then deploys this as a webapp using Flask
 
 
+INPUTS
+
+img_path -   path to an image
+
+
+OUTPUTS
+
+Returns a dog breed description if a dog is detected
+If a human is detected it outputs the closest resemblace to a dog
+
+
+
+SCRIPT EXECUTION SAMPLE
+
+python web_app.py
+
+'''
 
 from flask import Flask, request, jsonify, render_template
 import cv2
@@ -122,6 +139,14 @@ def dog_detector_resnet(img_path):
 def predict_breed_transfer(img_path, model_transfer):
     
     '''
+    DESCRIPTION
+    Uses a model passed to it to predict a dog breed of a given image
+    
+    INPUTS
+    img_path -   path to an image
+    
+    OUTPUT
+    pred_out_name - the dog breed identified by the model
     
     '''
     f = open('dog_breed_list.txt')
@@ -157,8 +182,11 @@ def predict_breed_transfer(img_path, model_transfer):
 
 
 
+# Webapp deployment
 
 app = Flask(__name__)
+
+# get the app root folder
 
 root_path = os.path.dirname(os.path.abspath(__file__))
 
@@ -174,19 +202,28 @@ def index():
 
 def upload_file():
     
+    # path to save uploaded picture
+    
     target_path = os.path.join(root_path, 'static/')
+    
+    # create folder if missing
     
     if not os.path.isdir(target_path):
         os.mkdir(target_path)
     
     
+    # get uploaded image from form
     
     file = request.files['file']
+    
+    # since app does not work with all image formats checking is done here
     
     image_ext=['bmp', 'jpe', 'jpg', 'jpeg', 'xpm', 'ief', 'pbm', 'tif', 'gif']
     
     if file.filename.split('.')[1] not in image_ext:
         return jsonify('Image file format not supported at the moment. Please return to the previous page')
+    
+    # save fine to destination folder
     
     filename = file.filename
     destination_path = "/".join([target_path, filename])
@@ -195,6 +232,7 @@ def upload_file():
     
    
     
+    # defining model and loading trained model
     
     model_transfer = models.densenet121(pretrained=True)
     num_inputs = model_transfer.classifier.in_features

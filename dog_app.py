@@ -1,9 +1,27 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Mar 11 21:19:54 2021
+'''
+DESCRIPTION
 
-@author: BronyahJ
-"""
+This module is able to process an image given to it and detect either a dog or human
+It further is able to classify the detected dog breed using a trained model with 82% accuracy
+
+
+INPUTS
+
+img_path -   path to an image
+
+
+OUTPUTS
+
+Returns a dog breed description if a dog is detected
+If a human is detected it outputs the closest resemblace to a dog
+
+
+
+SCRIPT EXECUTION SAMPLE
+
+python dog_app.py <img_path>
+
+'''
 
 import torch
 from torchvision import models, transforms
@@ -112,6 +130,11 @@ def dog_detector_resnet(img_path):
 def define_model():
     
     '''
+    DESCRIPTION
+    Defines the framework for the model to be used for classifcation
+    
+    OUTPUT
+    model_transfer - the finetuned model architecture
     
     
     '''
@@ -133,6 +156,14 @@ def define_model():
 def predict_breed_transfer(img_path, model_transfer):
     
     '''
+    DESCRIPTION
+    Uses a model passed to it to predict a dog breed of a given image
+    
+    INPUTS
+    img_path -   path to an image
+    
+    OUTPUT
+    pred_out_name - the dog breed identified by the model
     
     '''
     f = open('dog_breed_list.txt')
@@ -171,6 +202,10 @@ def predict_breed_transfer(img_path, model_transfer):
 def run_app(img_path):
     
     '''
+    DESCRIPTION
+    Uses the previously defined functions to detect either a dog or human
+    if a dog is  detected the breed is identified
+    if a human is detected the closest dog breed resemblace is found
     
     '''
     
