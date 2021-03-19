@@ -8,9 +8,13 @@
 
 3. [File Description](#desc)
 
-4. [Screenshots](#rslts)
+4. [Results](#rslt_table)
 
-5. [Licensing, Authors, Acknowledgements](#ack)
+5. [Conclusion](#conc)
+
+6. [Screenshots](#rslts)
+
+7. [Licensing, Authors, Acknowledgements](#ack)
 
 <a name="install"></a>
 ## Installation
@@ -48,6 +52,28 @@ It does this in the below steps:
 
 **model_transfer.pt** Output classifier pytorch model
 
+
+<a name="rslt_table"></a>
+## Results
+
+| Model           | Accuracy      | Loss   |
+| -------------   |:-------------:| -----: |
+| model_scratch   |     11%       |  3.87  |
+| model_transfer  |     82%       |  0.76  |
+
+The scratch model used initially was basic and required much more time to reach appreciable accuracy.
+Even with batch norm and bigger learning rates training was slow with low accuracy.
+Using a pre-trained **densenet-121** model and finetuning the classifer layer achieved much better results.
+
+
+<a name="conc"></a>
+## Conclusion
+
+The implementation of this project was challenging as it was interesting.
+From exploring the data to processing the images for use in a transfer learning model.
+One aspect that i faced some difficulties was selecting the right neural architecture to use as the go-to models like **VGG-16** had many parameters and therefore had very large pytorch model sizes which was not ideal for web deployment.
+Finally settled on **densenet121** since the model size is small but delivers great accuracy.
+I also got to improve a little bit on my web development skills. I still have much to do in terms of writing javacript code to make the webapp more interactive and also deploy on a hosting site such as **Heroku**.
 
 <a name="rslts"></a>
 ## Screenshots
