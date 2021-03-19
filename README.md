@@ -40,9 +40,7 @@ It does this in the below steps:
 ## File Description
 **dog_app.py:** Python module to perform dog classification
 
-**Data_Exploration.ipynb:** Notebook to explore raw data and visualize data
-
-**dog_app_pytorch.ipynb:** Notebook to process data and train model
+**dog_app_pytorch.ipynb:** Notebook to explore raw data and visualize data and also process data and train model Notebook
 
 **web_app.py:** Module to launch Flask web app
 
